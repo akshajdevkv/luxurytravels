@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luxury Travels - Experience the finest destinations in France with our premium travel agency services">
+    <title>Luxury Travels - Premium French Destinations</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-gem"></i>
+                <span>Luxury Travels</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                <li><a href="#booking" class="nav-link">Book Now</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Parallax -->
+    <section id="home" class="hero">
+        <div class="parallax-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in">Discover the Magic of France</h1>
+            <p class="hero-subtitle animate-fade-in-delay">Experience Luxury Beyond Imagination</p>
+            <a href="#booking" class="cta-button animate-fade-in-delay-2">
+                <span>Start Your Journey</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll Down</p>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Iconic Destinations</h2>
+                <p class="section-subtitle">Explore the most breathtaking locations in France</p>
+            </div>
+            <div class="destinations-grid">
+                <!-- Destination Card 1: Eiffel Tower -->
+                <div class="destination-card" data-aos="fade-up">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&auto=format&fit=crop" alt="Eiffel Tower">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>Eiffel Tower</h3>
+                                <p>Paris • The City of Light</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination Card 2: Mont Saint-Michel -->
+                <div class="destination-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1583039498774-7fcbf8c0f2f5?w=800&auto=format&fit=crop" alt="Mont Saint-Michel">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>Mont Saint-Michel</h3>
+                                <p>Normandy • Medieval Marvel</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination Card 3: French Riviera -->
+                <div class="destination-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=800&auto=format&fit=crop" alt="French Riviera">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>French Riviera</h3>
+                                <p>Côte d'Azur • Azure Coast</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination Card 4: Loire Valley -->
+                <div class="destination-card" data-aos="fade-up">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1575642787948-9e8f2d6db68d?w=800&auto=format&fit=crop" alt="Loire Valley">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>Loire Valley</h3>
+                                <p>Central France • Château Country</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination Card 5: Louvre Museum -->
+                <div class="destination-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&auto=format&fit=crop" alt="Louvre Museum">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>Louvre Museum</h3>
+                                <p>Paris • Art & History</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destination Card 6: Provence -->
+                <div class="destination-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&auto=format&fit=crop" alt="Provence">
+                        <div class="card-overlay">
+                            <div class="card-content">
+                                <h3>Provence</h3>
+                                <p>South France • Lavender Fields</p>
+                                <a href="#booking" class="card-button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Plan Your Dream Trip</h2>
+                <p class="section-subtitle">Book your luxury experience in just a few clicks</p>
+            </div>
+            <div class="booking-form-container" data-aos="zoom-in">
+                <form class="booking-form" id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="destination">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Destination
+                            </label>
+                            <select id="destination" name="destination" required>
+                                <option value="">Select a destination</option>
+                                <option value="paris">Paris - Eiffel Tower</option>
+                                <option value="mont-saint-michel">Mont Saint-Michel</option>
+                                <option value="french-riviera">French Riviera</option>
+                                <option value="loire-valley">Loire Valley</option>
+                                <option value="louvre">Louvre Museum</option>
+                                <option value="provence">Provence</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkin">
+                                <i class="fas fa-calendar-alt"></i>
+                                Check-in Date
+                            </label>
+                            <input type="date" id="checkin" name="checkin" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkout">
+                                <i class="fas fa-calendar-check"></i>
+                                Check-out Date
+                            </label>
+                            <input type="date" id="checkout" name="checkout" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="travelers">
+                                <i class="fas fa-users"></i>
+                                Travelers
+                            </label>
+                            <select id="travelers" name="travelers" required>
+                                <option value="">Number of travelers</option>
+                                <option value="1">1 Traveler</option>
+                                <option value="2">2 Travelers</option>
+                                <option value="3">3 Travelers</option>
+                                <option value="4">4 Travelers</option>
+                                <option value="5">5+ Travelers</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="special-requests">
+                                <i class="fas fa-comment-dots"></i>
+                                Special Requests (Optional)
+                            </label>
+                            <textarea id="special-requests" name="special-requests" rows="4" placeholder="Any special requirements or preferences..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <span>Search Available Packages</span>
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <h2 class="section-title">About Luxury Travels</h2>
+                    <p class="about-description">
+                        For over two decades, Luxury Travels has been crafting extraordinary experiences for discerning travelers seeking the finest that France has to offer. Our passion for excellence and attention to detail ensures every journey is unforgettable.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Premium Service</h3>
+                                <p>24/7 concierge support for all your travel needs</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Trusted Experience</h3>
+                                <p>Over 20 years of curating luxury travel</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Exclusive Access</h3>
+                                <p>VIP treatment at the finest destinations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&auto=format&fit=crop" alt="Luxury Travel Experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">We're here to help you plan your perfect journey</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Phone</h3>
+                            <p>+33 1 234 567 89</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Email</h3>
+                            <p>contact@luxurytravels.com</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Address</h3>
+                            <p>123 Champs-Élysées, Paris, France</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form" data-aos="fade-left">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-gem"></i>
+                        <span>Luxury Travels</span>
+                    </div>
+                    <p class="footer-description">
+                        Creating unforgettable luxury experiences in the heart of France since 2003.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#booking">Book Now</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Destinations</h3>
+                    <ul class="footer-links">
+                        <li><a href="#destinations">Paris</a></li>
+                        <li><a href="#destinations">Mont Saint-Michel</a></li>
+                        <li><a href="#destinations">French Riviera</a></li>
+                        <li><a href="#destinations">Loire Valley</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for exclusive travel deals</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Luxury Travels. All rights reserved. Crafted with <i class="fas fa-heart"></i> in Paris</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
