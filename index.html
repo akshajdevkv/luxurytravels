@@ -172,22 +172,59 @@
             </div>
             <div class="booking-form-container" data-aos="zoom-in">
                 <form class="booking-form" id="booking-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="destination">
+                    <div class="form-row full-width">
+                        <div class="form-group full-width">
+                            <label>
                                 <i class="fas fa-map-marker-alt"></i>
-                                Destination
+                                Select Destinations <span class="destination-count">(0 selected)</span>
                             </label>
-                            <select id="destination" name="destination" required>
-                                <option value="">Select a destination</option>
-                                <option value="paris">Paris - Eiffel Tower</option>
-                                <option value="mont-saint-michel">Mont Saint-Michel</option>
-                                <option value="french-riviera">French Riviera</option>
-                                <option value="loire-valley">Loire Valley</option>
-                                <option value="louvre">Louvre Museum</option>
-                                <option value="provence">Provence</option>
-                            </select>
+                            <div class="destination-selector">
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-paris" name="destinations" value="paris">
+                                    <label for="dest-paris">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">Paris</span>
+                                    </label>
+                                </div>
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-mont" name="destinations" value="mont-saint-michel">
+                                    <label for="dest-mont">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">Mont Saint-Michel</span>
+                                    </label>
+                                </div>
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-riviera" name="destinations" value="french-riviera">
+                                    <label for="dest-riviera">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">French Riviera</span>
+                                    </label>
+                                </div>
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-loire" name="destinations" value="loire-valley">
+                                    <label for="dest-loire">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">Loire Valley</span>
+                                    </label>
+                                </div>
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-louvre" name="destinations" value="louvre">
+                                    <label for="dest-louvre">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">Louvre Museum</span>
+                                    </label>
+                                </div>
+                                <div class="destination-option">
+                                    <input type="checkbox" id="dest-provence" name="destinations" value="provence">
+                                    <label for="dest-provence">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="dest-name">Provence</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="checkin">
                                 <i class="fas fa-calendar-alt"></i>

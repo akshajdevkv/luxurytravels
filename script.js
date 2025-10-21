@@ -88,6 +88,31 @@ document.querySelectorAll('[data-aos]').forEach(element => {
 });
 
 // ===================================
+// Multi-Destination Selection Handling
+// ===================================
+const destinationCheckboxes = document.querySelectorAll('input[name="destinations"]');
+const destinationCount = document.querySelector('.destination-count');
+
+// Update destination count
+function updateDestinationCount() {
+    const selected = document.querySelectorAll('input[name="destinations"]:checked');
+    const count = selected.length;
+    destinationCount.textContent = `(${count} selected)`;
+    
+    // Add visual feedback
+    if (count > 0) {
+        destinationCount.style.color = 'var(--neon-cyan)';
+    } else {
+        destinationCount.style.color = 'rgba(255, 255, 255, 0.7)';
+    }
+}
+
+// Listen for checkbox changes
+destinationCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateDestinationCount);
+});
+
+// ===================================
 // Booking Form Handling
 // ===================================
 const bookingForm = document.getElementById('booking-form');
@@ -95,12 +120,21 @@ const bookingForm = document.getElementById('booking-form');
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
+    // Get selected destinations
+    const selectedDestinations = Array.from(document.querySelectorAll('input[name="destinations"]:checked'))
+        .map(checkbox => checkbox.value);
+    
     // Get form values
-    const destination = document.getElementById('destination').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     const travelers = document.getElementById('travelers').value;
     const specialRequests = document.getElementById('special-requests').value;
+    
+    // Validate destinations
+    if (selectedDestinations.length === 0) {
+        showNotification('Please select at least one destination', 'error');
+        return;
+    }
     
     // Validate dates
     const checkinDate = new Date(checkin);
@@ -118,15 +152,73 @@ bookingForm.addEventListener('submit', (e) => {
         return;
     }
     
+    // Calculate trip duration
+    const duration = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+    
+    // Find matching packages
+    const matchingPackages = findMatchingPackages(selectedDestinations, duration);
+    
     // Simulate booking process
     showNotification('Searching for available packages...', 'info');
     
     setTimeout(() => {
-        const destinationName = document.querySelector(`#destination option[value="${destination}"]`).textContent;
-        showNotification(`Great choice! We found amazing packages for ${destinationName}. A travel consultant will contact you shortly!`, 'success');
+        if (matchingPackages.length > 0) {
+            const destNames = selectedDestinations.map(d => {
+                const checkbox = document.querySelector(`input[value="${d}"]`);
+                return checkbox.nextElementSibling.querySelector('.dest-name').textContent;
+            });
+            
+            const message = selectedDestinations.length === 1 
+                ? `Great choice! We found ${matchingPackages.length} amazing package(s) for ${destNames[0]}.`
+                : `Wonderful! We found ${matchingPackages.length} multi-city package(s) covering ${destNames.join(', ')}.`;
+            
+            showNotification(message + ' A travel consultant will contact you shortly!', 'success');
+            
+            // Show recommended package
+            if (matchingPackages.length > 0) {
+                setTimeout(() => {
+                    showNotification(`💎 Recommended: ${matchingPackages[0].name} - ${matchingPackages[0].price.display}`, 'info');
+                }, 2500);
+            }
+        } else {
+            showNotification('We\'ll create a custom package for your selected destinations. Our team will contact you within 24 hours!', 'success');
+        }
+        
+        // Reset form
         bookingForm.reset();
+        updateDestinationCount();
     }, 2000);
 });
+
+// ===================================
+// Find Matching Packages
+// ===================================
+function findMatchingPackages(selectedDestinations, duration) {
+    if (typeof travelPackages === 'undefined') return [];
+    
+    return travelPackages.filter(pkg => {
+        // Check if package covers selected destinations
+        const pkgDestinations = pkg.destinations.map(d => d.toLowerCase().replace(/\s+/g, '-'));
+        const matchCount = selectedDestinations.filter(dest => {
+            return pkgDestinations.some(pkgDest => 
+                pkgDest.includes(dest) || dest.includes(pkgDest.split('-')[0])
+            );
+        }).length;
+        
+        // For multi-destination, require at least 50% match
+        const matchPercentage = matchCount / selectedDestinations.length;
+        const isMultiCity = selectedDestinations.length > 1;
+        
+        // Duration match (with 30% flexibility)
+        const durationMatch = duration >= (pkg.duration.days * 0.7) && duration <= (pkg.duration.days * 1.3);
+        
+        if (isMultiCity) {
+            return matchPercentage >= 0.5 && pkg.destination === 'multiple';
+        } else {
+            return matchCount > 0;
+        }
+    });
+}
 
 // ===================================
 // Contact Form Handling
@@ -473,8 +565,13 @@ function renderPackages() {
         else if (pkg.badge === 'BEST VALUE') badgeClass = 'best-value';
         else if (pkg.badge === 'LUXURY') badgeClass = 'luxury';
         
+        // Multi-destination indicator
+        const isMultiCity = pkg.destinations.length > 1;
+        const multiCityBadge = isMultiCity ? '<span class="multi-city-badge"><i class="fas fa-route"></i> Multi-City</span>' : '';
+        
         packageCard.innerHTML = `
             <span class="package-badge ${badgeClass}">${pkg.badge}</span>
+            ${multiCityBadge}
             <div class="package-image">
                 <img src="${pkg.image}" alt="${pkg.name}">
             </div>
@@ -496,7 +593,7 @@ function renderPackages() {
                     </div>
                     <div class="detail-item">
                         <i class="fas fa-map-marked-alt"></i>
-                        <span>${pkg.destinations.join(', ')}</span>
+                        <span class="destinations-list">${pkg.destinations.join(' → ')}</span>
                     </div>
                     <div class="detail-item">
                         <i class="fas fa-hotel"></i>
