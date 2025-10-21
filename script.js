@@ -431,6 +431,243 @@ window.addEventListener('load', () => {
 });
 
 // ===================================
+// Render Travel Packages
+// ===================================
+function renderPackages() {
+    const packagesGrid = document.getElementById('packages-grid');
+    
+    if (!packagesGrid || typeof travelPackages === 'undefined') {
+        return;
+    }
+    
+    packagesGrid.innerHTML = '';
+    
+    travelPackages.forEach((pkg, index) => {
+        const packageCard = document.createElement('div');
+        packageCard.className = 'package-card';
+        packageCard.setAttribute('data-aos', 'fade-up');
+        packageCard.setAttribute('data-aos-delay', (index * 100).toString());
+        
+        // Generate stars
+        const fullStars = Math.floor(pkg.rating);
+        const hasHalfStar = pkg.rating % 1 !== 0;
+        let starsHTML = '';
+        for (let i = 0; i < fullStars; i++) {
+            starsHTML += '<i class="fas fa-star"></i>';
+        }
+        if (hasHalfStar) {
+            starsHTML += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        // Generate highlights (show first 4)
+        const highlightsHTML = pkg.highlights.slice(0, 4).map(highlight => 
+            `<div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>${highlight}</span>
+            </div>`
+        ).join('');
+        
+        // Determine badge class
+        let badgeClass = '';
+        if (pkg.badge === 'POPULAR') badgeClass = 'popular';
+        else if (pkg.badge === 'BEST VALUE') badgeClass = 'best-value';
+        else if (pkg.badge === 'LUXURY') badgeClass = 'luxury';
+        
+        packageCard.innerHTML = `
+            <span class="package-badge ${badgeClass}">${pkg.badge}</span>
+            <div class="package-image">
+                <img src="${pkg.image}" alt="${pkg.name}">
+            </div>
+            <div class="package-content">
+                <div class="package-header">
+                    <h3 class="package-title">${pkg.name}</h3>
+                    <p class="package-tagline">${pkg.tagline}</p>
+                </div>
+                
+                <div class="package-rating">
+                    <div class="stars">${starsHTML}</div>
+                    <span class="rating-text">${pkg.rating} (${pkg.reviews} reviews)</span>
+                </div>
+                
+                <div class="package-details">
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>${pkg.duration.days} Days / ${pkg.duration.nights} Nights</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>${pkg.destinations.join(', ')}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-hotel"></i>
+                        <span>${pkg.hotel}</span>
+                    </div>
+                </div>
+                
+                <div class="package-highlights">
+                    <h4>Package Highlights:</h4>
+                    <div class="highlights-list">
+                        ${highlightsHTML}
+                    </div>
+                </div>
+                
+                <div class="package-price">
+                    <p class="price-label">Starting from</p>
+                    <span class="price-amount">${pkg.price.display}</span>
+                    <p class="price-duration">per person</p>
+                    
+                    <div class="package-buttons">
+                        <button class="btn-primary" onclick="openPackageModal(${pkg.id})">View Details</button>
+                        <a href="#booking" class="btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        packagesGrid.appendChild(packageCard);
+    });
+    
+    // Trigger AOS animations for newly added elements
+    if (typeof observer !== 'undefined') {
+        document.querySelectorAll('.package-card[data-aos]').forEach(element => {
+            observer.observe(element);
+        });
+    }
+}
+
+// ===================================
+// Package Modal Functionality
+// ===================================
+function openPackageModal(packageId) {
+    const pkg = travelPackages.find(p => p.id === packageId);
+    if (!pkg) return;
+    
+    // Remove existing modal if any
+    const existingModal = document.querySelector('.package-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'package-modal active';
+    
+    // Generate included items
+    const includedHTML = pkg.included.map(item => 
+        `<li><i class="fas fa-check-circle" style="color: #28a745;"></i> ${item}</li>`
+    ).join('');
+    
+    // Generate excluded items
+    const excludedHTML = pkg.excluded.map(item => 
+        `<li><i class="fas fa-times-circle"></i> ${item}</li>`
+    ).join('');
+    
+    // Generate itinerary
+    const itineraryHTML = pkg.itinerary.map(day => 
+        `<div class="itinerary-item">
+            <div class="itinerary-day">Day ${day.day}</div>
+            <div class="itinerary-title">${day.title}</div>
+            <div class="itinerary-description">${day.description}</div>
+        </div>`
+    ).join('');
+    
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePackageModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem;">${pkg.name}</h2>
+                <p style="font-size: 1.2rem; opacity: 0.9;">${pkg.tagline}</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span style="margin-left: 0.5rem;">${pkg.duration.label} (${pkg.duration.days} Days / ${pkg.duration.nights} Nights)</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-hotel"></i>
+                        <span style="margin-left: 0.5rem;">${pkg.hotel}</span>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: 700;">
+                        <i class="fas fa-tag"></i>
+                        <span style="margin-left: 0.5rem;">${pkg.price.display}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i class="fas fa-route"></i> Detailed Itinerary</h3>
+                    ${itineraryHTML}
+                </div>
+                
+                <div class="modal-section">
+                    <h3><i class="fas fa-check-circle"></i> What's Included</h3>
+                    <ul class="included-list" style="list-style: none;">
+                        ${includedHTML}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><i class="fas fa-times-circle"></i> What's Not Included</h3>
+                    <ul class="excluded-list" style="list-style: none;">
+                        ${excludedHTML}
+                    </ul>
+                </div>
+                
+                <div class="modal-section" style="text-align: center; padding: 2rem; background: var(--bg-light); border-radius: 15px;">
+                    <h3 style="margin-bottom: 1rem;">Ready to Book This Package?</h3>
+                    <p style="margin-bottom: 1.5rem; color: #6c757d;">Contact us to customize this package or book now!</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="#booking" class="btn-primary" onclick="closePackageModal()" style="display: inline-block;">Book Now</a>
+                        <a href="#contact" class="btn-secondary" onclick="closePackageModal()" style="display: inline-block;">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closePackageModal();
+        }
+    });
+}
+
+function closePackageModal() {
+    const modal = document.querySelector('.package-modal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePackageModal();
+    }
+});
+
+// Initialize packages on page load
+document.addEventListener('DOMContentLoaded', () => {
+    renderPackages();
+});
+
+// Also render immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+    // Do nothing, DOMContentLoaded will handle it
+} else {
+    // DOM is already ready
+    renderPackages();
+}
+
+// ===================================
 // Console Welcome Message
 // ===================================
 console.log('%c🌟 Welcome to Luxury Travels! 🌟', 'color: #667eea; font-size: 20px; font-weight: bold;');
